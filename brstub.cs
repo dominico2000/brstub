@@ -23,6 +23,7 @@ public class brstub
 
 
 
+
     //PRIVATE METHODS
 
     private static string GetMd5Hash(MD5 md5Hash, string input)
@@ -47,6 +48,138 @@ public class brstub
     }
 
     //PUBLIC METHODS
+
+
+    /// <summary>
+    /// Encrypt file with random key and IV.
+    /// </summary>
+    /// <param name="file">File as byte array.</param>
+    /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
+    public Tuple<byte[], byte[], byte[]> encrypt(byte[] file)
+    {
+        byte[] encrypted;
+        byte[] key;
+        byte[] IV;
+
+        using (Aes aesecr = Aes.Create())
+        {
+
+            aesdcr.BlockSize = 128;
+            aesdcr.KeySize = 256;
+            aesdcr.Mode = CipherMode.CBC;
+
+            aesecr.Key = aesecr.GenerateKey;
+            aesecr.GenerateIV();
+
+            key = aesecr.Key;
+            IV = aesecr.IV;
+
+
+
+            var encryptor = aesecr.CreateEncryptor(aesecr.Key, aesecr.IV);
+
+            // Create the streams used for encryption. 
+            using (var msEncrypt = new MemoryStream())
+            {
+                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+                    using (var swEncrypt = new StreamWriter(csEncrypt))
+                    {
+                        //Write all data to the stream.
+                        swEncrypt.Write(file);
+                    }
+                    encrypted = msEncrypt.ToArray();
+                }
+            }
+        }
+        return new Tuple<byte[], byte[], byte[]>(encrypted, key, IV);
+    }
+
+    /// <summary>
+    /// Encrypt file with user set key and random IV.
+    /// </summary>
+    /// <param name="file">File as byte array.</param>
+    /// <param name="IV">IV as byte array.</param>
+    /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
+    public Tuple<byte[], byte[]> encrypt(byte[] file, byte[] key)
+    {
+        byte[] encrypted;
+        byte[] IV;
+
+        using (Aes aesecr = Aes.Create())
+        {
+
+            aesdcr.BlockSize = 128;
+            aesdcr.KeySize = 256;
+            aesdcr.Mode = CipherMode.CBC;
+
+            aesecr.Key = key;
+            aesecr.GenerateIV();
+
+            IV = aesecr.IV;
+
+
+
+            var encryptor = aesecr.CreateEncryptor(aesecr.Key, aesecr.IV);
+
+            // Create the streams used for encryption. 
+            using (var msEncrypt = new MemoryStream())
+            {
+                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+                    using (var swEncrypt = new StreamWriter(csEncrypt))
+                    {
+                        //Write all data to the stream.
+                        swEncrypt.Write(file);
+                    }
+                    encrypted = msEncrypt.ToArray();
+                }
+            }
+        }
+        return new Tuple<byte[], byte[]>(encrypted, IV);
+    }
+
+    /// <summary>
+    /// Encrypt file with user set key and IV
+    /// </summary>
+    /// <param name="file">>File as byte array.</param>
+    /// <param name="key">Key as byte array.</param>
+    /// <param name="IV">IV as byte array.</param>
+    /// <returns></returns>
+    public byte[] encrypt(byte[] file, byte[] key, byte[] IV)
+    {
+        byte[] encrypted;
+    
+
+        using (Aes aesecr = Aes.Create())
+        {
+
+            aesdcr.BlockSize = 128;
+            aesdcr.KeySize = 256;
+            aesdcr.Mode = CipherMode.CBC;
+
+            aesecr.Key = key;
+            aesecr.IV = IV;
+
+
+            var encryptor = aesecr.CreateEncryptor(aesecr.Key, aesecr.IV);
+
+            // Create the streams used for encryption. 
+            using (var msEncrypt = new MemoryStream())
+            {
+                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+                    using (var swEncrypt = new StreamWriter(csEncrypt))
+                    {
+                        //Write all data to the stream.
+                        swEncrypt.Write(file);
+                    }
+                    encrypted = msEncrypt.ToArray();
+                }
+            }
+        }
+        return encrypted;
+    }
 
 
     /// <summary>
