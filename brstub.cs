@@ -50,7 +50,7 @@ public class brstub
 
 
     /// <summary>
-    /// This function decrypt exe file .
+    /// Decrypt exe file .
     /// </summary>
     /// <returns>Byte array of decrypted file.</returns>
     public byte[] decrypt()
@@ -92,7 +92,7 @@ public class brstub
     /// Check's decrypted file is correct.
     /// </summary>
     /// <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
-    /// <returns>Return true if hashes are  same or false if hashes are different.</returns>
+    /// <returns>Return true if hashes are  same, false if hashes are different.</returns>
     public bool checkMD5(string hashMD5)
     {
         using ( MD5 md5Hash = MD5.Create())
@@ -113,10 +113,18 @@ public class brstub
             }
         }
     }
-
-    public string saveFile(string path)
+    
+    /// <summary>
+    /// Save decrypted array to file
+    /// </summary>
+    /// <param name="path">Path to save file</param>
+    /// <returns>Return true if file's exist ,false if isn't exist.</returns>
+    public bool saveFile(string path)
     {
+        File.WriteAllBytes(path, decrypted);
 
+        if (File.Exists(path)) return true;
+        else return false;
     }
     
 }
