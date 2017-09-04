@@ -12,7 +12,7 @@ public class brstub
     //variables
 
     byte[] decrypted;
-    public byte[] Decrypted { get => decrypted; set => decrypted = value; }
+    public byte[] Decrypted { get => decrypted }
 
     enum regKeyType
     {
