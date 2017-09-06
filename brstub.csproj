@@ -2,10 +2,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00000000-0000-0000-0000-000000000000}</ProjectGuid>
+    <ProjectGuid>{12E1379B-B4A3-4BC2-BCC9-8240038C1E20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>ClassLibrary</AssemblyName>
+    <AssemblyName>brstub</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,6 +17,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\brstub.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -25,6 +27,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\brstub.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>brstub</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -34,6 +40,72 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\FETCH_HEAD" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\README.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\master" />
+    <None Include=".git\logs\refs\remotes\origin\master" />
+    <None Include=".git\logs\refs\stash" />
+    <None Include=".git\objects\06\6d5761475087c0a92bd62d5421cd470229aa43" />
+    <None Include=".git\objects\06\7827a0e3ec06411efd531c383096781c77e7d6" />
+    <None Include=".git\objects\24\1b3ae05f0065bd84af444e4f71ead47beeb1b1" />
+    <None Include=".git\objects\25\bec3a1e1f67b920d511b5a20c0c9e80913be9f" />
+    <None Include=".git\objects\29\cf19bee3356abb2490c9ccd42026cb0516e2b8" />
+    <None Include=".git\objects\2b\e838041b8e78ad0856addf8d4a949a9eae5d80" />
+    <None Include=".git\objects\2e\86a485f4cef9be19e9ee1b1518898ca18fe8f5" />
+    <None Include=".git\objects\31\ba99525911d3676cd11f4893be589abedbbb84" />
+    <None Include=".git\objects\46\114f1e6d5c560efd61616f2e73b49057a828e4" />
+    <None Include=".git\objects\49\02ddf855ef29ff5b63dbbfe3b7b8d1444bbce3" />
+    <None Include=".git\objects\4d\043c16e13d65683232aa7545a41ef02a4fa0f2" />
+    <None Include=".git\objects\4e\a9bbc2e818ee7773458ff20329cf7f6a91b8f9" />
+    <None Include=".git\objects\51\694d4c5a5f1c000ac9d5d4a1ec05b7494459ac" />
+    <None Include=".git\objects\5b\293d2a030505cb28398f746005115f85810ebe" />
+    <None Include=".git\objects\5b\c7ee825654507c7a6bf46968e1ffe5430f332d" />
+    <None Include=".git\objects\60\716e8910220bb133ba11bef12deb844c999a28" />
+    <None Include=".git\objects\6c\5aa51a76630395ba7979911ccae5563d1be66b" />
+    <None Include=".git\objects\71\2f827aa45355cd4492a017d07871b89dc17ccf" />
+    <None Include=".git\objects\8b\fe0aea1563c19a4865b9038527698a75ca6237" />
+    <None Include=".git\objects\8c\7ffbf80df00a07b6ccbac61e4eff0f7377e8e4" />
+    <None Include=".git\objects\8c\e2ca54b905a6a768f5ae24d7addc6946678225" />
+    <None Include=".git\objects\99\64deec62bfd3796b6d66a5f7fed7166fe3194d" />
+    <None Include=".git\objects\9d\ac27cccd66c71c4c3989ed926d4e4b1b54cf92" />
+    <None Include=".git\objects\ad\a3da91a0713a608b5d679e4cf8b0c20fca2ccb" />
+    <None Include=".git\objects\ad\a539e32aa60c9dcacda1bdac95bac9674ed622" />
+    <None Include=".git\objects\b0\cbf0b0d4d0b679bb6584c6be27a07af444dca0" />
+    <None Include=".git\objects\b2\5df54bd2b0b25f58924cff07681771eb0c72be" />
+    <None Include=".git\objects\bd\c3362b423a9e50c04c8adfdd4e8b9145bca560" />
+    <None Include=".git\objects\c8\1f8fb223cefa08e927cb75a1fa2a96ac87a51f" />
+    <None Include=".git\objects\cd\a10a8182fa901849504770e943d896e30c4092" />
+    <None Include=".git\objects\d0\54d161e98646c4c069ab96207ebe0abe7a0ff1" />
+    <None Include=".git\objects\d0\65d683a6a7044b2a2a47652a8a0c4d00c2be60" />
+    <None Include=".git\objects\d4\a47b41264222e43a02cbb61a7067a3f53064e5" />
+    <None Include=".git\objects\d7\5c8b9f7d656211be262cf82b503b8a6ac170d9" />
+    <None Include=".git\objects\e8\886cb1f9e0c52be6d33ecfe4deee091c04499d" />
+    <None Include=".git\objects\eb\1c6946fd7a0773c94b492059f8bd99f31a7c5d" />
+    <None Include=".git\objects\f4\7cfa1a0c7b8f02499313091f9c146c1face4c9" />
+    <None Include=".git\objects\f9\35f030c103fd7ea9737aca16e97e760aa7550a" />
+    <None Include=".git\objects\fb\baee6a82bc21228072c585731fd84432b54c88" />
+    <None Include=".git\objects\pack\pack-5968917122199318c6d005485a11df3fab6e9025.idx" />
+    <None Include=".git\objects\pack\pack-5968917122199318c6d005485a11df3fab6e9025.pack" />
+    <None Include=".git\objects\pack\pack-c6f3c443eaf80cef736c03572da1b72c0c78682f.idx" />
+    <None Include=".git\objects\pack\pack-c6f3c443eaf80cef736c03572da1b72c0c78682f.pack" />
+    <None Include=".git\ORIG_HEAD" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="brstub.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

