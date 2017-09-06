@@ -4,3 +4,6 @@ D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Release\brstub.pdb
 D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Release\brstub.csproj.CoreCompileInputs.cache
 D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Release\brstub.dll
 D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Release\brstub.pdb
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Release\brstub.dll.CodeAnalysisLog.xml
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\bin\Release\brstub.dll.lastcodeanalysissucceeded
+D:\Programowanie\VisulaStudio\C#\Class\br_installer\obj\Release\brstub.csprojResolveAssemblyReference.cache
