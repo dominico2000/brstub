@@ -12,11 +12,7 @@ public class Brstub
     //variables
 
     byte[] decrypted;
-<<<<<<< HEAD
 
-    public byte[] Decrypted { get => decrypted; }
-=======
->>>>>>> master
 
     /// <summary>
     /// Get decrypted value
