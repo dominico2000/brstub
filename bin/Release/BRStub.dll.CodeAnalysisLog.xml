@@ -2,12 +2,12 @@
 <?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\enterprise\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="15.0">
  <Targets>
-  <Target Name="D:\Programowanie\VS\C#\Class\br_installer\bin\Release\brstub.dll">
+  <Target Name="D:\Programowanie\VS\C#\Class\br_installer\bin\Release\BRStub.dll">
    <Modules>
     <Module Name="brstub.dll">
      <Messages>
-      <Message TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016" Status="Active" Created="2017-09-07 19:32:20Z" FixCategory="NonBreaking">
-       <Issue Certainty="95" Level="Error">Dodaj atrybut AssemblyVersion do elementu 'brstub.dll'.</Issue>
+      <Message TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016" Status="Active" Created="2017-09-07 19:49:48Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Error">Dodaj atrybut AssemblyVersion do elementu 'BRStub.dll'.</Issue>
       </Message>
      </Messages>
      <Namespaces>
@@ -17,7 +17,7 @@
          <Members>
           <Member Name="#Decrypt(System.Byte[],System.Byte[],System.Byte[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:32:20Z" FixCategory="DependsOnFix">
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:49:48Z" FixCategory="DependsOnFix">
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="241">Obiekt 'csDecrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Decrypt(byte[], byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 241</Issue>
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="241">Obiekt 'msDecrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Decrypt(byte[], byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 241, 244</Issue>
             </Message>
@@ -25,7 +25,7 @@
           </Member>
           <Member Name="#Encrypt(System.Byte[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:32:20Z" FixCategory="DependsOnFix">
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:49:48Z" FixCategory="DependsOnFix">
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="122">Obiekt 'csEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 122</Issue>
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="122">Obiekt 'msEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 122, 124</Issue>
             </Message>
@@ -33,7 +33,7 @@
           </Member>
           <Member Name="#Encrypt(System.Byte[],System.Byte[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:32:20Z" FixCategory="DependsOnFix">
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:49:48Z" FixCategory="DependsOnFix">
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="164">Obiekt 'csEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 164</Issue>
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="164">Obiekt 'msEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 164, 166</Issue>
             </Message>
@@ -41,7 +41,7 @@
           </Member>
           <Member Name="#Encrypt(System.Byte[],System.Byte[],System.Byte[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:32:20Z" FixCategory="DependsOnFix">
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-07 19:49:48Z" FixCategory="DependsOnFix">
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="204">Obiekt 'csEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[], byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 204</Issue>
              <Issue Certainty="75" Level="Warning" Path="D:\Programowanie\VS\C#\Class\br_installer" File="brstub.cs" Line="204">Obiekt 'msEncrypt' może zostać zlikwidowany więcej niż raz w metodzie 'Brstub.Encrypt(byte[], byte[], byte[])'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 204, 206</Issue>
             </Message>

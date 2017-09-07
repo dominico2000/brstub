@@ -61,7 +61,7 @@ public class Brstub
     /// </summary>
     /// <param name="input">Byte array of data to hash</param>
     /// <returns>Hash as string.</returns>
-    public static string GetMd5Hash(byte[] input)
+    public string GetMd5Hash(byte[] input)
     {
 
         
