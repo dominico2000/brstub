@@ -9,11 +9,6 @@
             Black Rabbit Stub Class
             </summary>
         </member>
-        <member name="P:Brstub.Decrypted">
-            <summary>
-            Get decrypted value
-            </summary>
-        </member>
         <member name="T:Brstub.RegKeyType">
             <summary>
             Type of register key.
@@ -26,47 +21,37 @@
             <param name="input">Byte array of data to hash</param>
             <returns>Hash as string.</returns>
         </member>
-        <member name="M:Brstub.Encrypt(System.Byte[])">
+        <member name="M:Brstub.GenKey">
             <summary>
-            Encrypt file with random key and IV.
+            Generate key.
             </summary>
-            <param name="file">File as byte array.</param>
-            <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
+            <returns></returns>
         </member>
         <member name="M:Brstub.Encrypt(System.Byte[],System.Byte[])">
             <summary>
-            Encrypt file with user set key and random IV.
+            Encrypting data.
             </summary>
-            <param name="file">File as byte array.</param>
-            <param name="key">Key as byte array.</param>
-            <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
+            <param name="bytesToBeEncrypted">Data to encrypt as byte array.</param>
+            <param name="passwordBytes">Key as byte array.</param>
+            <returns>Encrypted data as byte array.</returns>
         </member>
-        <member name="M:Brstub.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+        <member name="M:Brstub.Decrypt(System.Byte[],System.Byte[])">
             <summary>
-            Encrypt file with user set key and IV
+            Decrypting data.
             </summary>
-            <param name="file">>File as byte array.</param>
-            <param name="key">Key as byte array.</param>
-            <param name="IV">IV as byte array.</param>
-            <returns></returns>
+            <param name="bytesToBeDecrypted">Data to decrypt as byte array.</param>
+            <param name="passwordBytes">Key as byte array.</param>
+            <returns>Decrypted data as byte array</returns>
         </member>
-        <member name="M:Brstub.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
-            <summary>
-            Decrypt file.
-            </summary>
-            <param name="encFile">Encrypted file as byte array.</param>
-            <param name="key">Key as byte array.</param>
-            <param name="IV">IV as byte array.</param>
-            <returns>Byte array of decrypted file.</returns>
-        </member>
-        <member name="M:Brstub.CheckMD5(System.String)">
+        <member name="M:Brstub.CheckMD5(System.Byte[],System.String)">
             <summary>
             Check's decrypted file is correct.
             </summary>
+            <param name="decrypted">This is decrypted file table.</param>
             <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
             <returns>Return true if hashes are  same, false if hashes are different.</returns>
         </member>
-        <member name="M:Brstub.SaveFile(System.String)">
+        <member name="M:Brstub.SaveFile(System.String,System.Byte[])">
             <summary>
             Save decrypted array to file
             </summary>
